@@ -6,6 +6,8 @@ import telran.citizens.interfaces.Citizens;
 import telran.citizens.model.Person;
 
 import java.util.Arrays;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 class CitizensImpTest {
     Citizens citizens;
@@ -26,17 +28,26 @@ class CitizensImpTest {
 
     @Test
     void CitizensImpListPerson() {
-        citizens.add(new Person(10, "Samus", "Aran", 16 ));
-        citizens.add(new Person(8, "Nathan", "Drake", 19));
-        citizens.printPeople();
+        Citizens citizensConstr;
+        citizensConstr = new CitizensImp(Arrays.asList(
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(3, "Pac", "Man", 25),
+                new Person(3, "Pac", "Man", 25),
+                new Person(5, "Leon", "Kennedy", 45),
+                new Person(5, "AAA", "BBB", 4555)
+        ));
+        assertEquals(3, citizensConstr.size());
+
+
 
     }
     @Test
     void add() {
-        citizens.add(new Person(10, "Samus", "Aran", 16 ));
-        citizens.add(new Person(8, "Nathan", "Drake", 19));
+        assertTrue(citizens.add(new Person(10, "Samus", "Aran", 16 )));
+        assertTrue(citizens.add(new Person(8, "Nathan", "Drake", 19)));
+        assertFalse(citizens.add(new Person(10, "Samus", "Aran", 16 )));
         citizens.printPeople();
-
     }
 
     @Test
@@ -45,6 +56,9 @@ class CitizensImpTest {
 
     @Test
     void find() {
+        Person person = new Person(5, "Leon", "Kennedy", 45);
+        assertEquals(person, citizens.find(5));
+        assertNull(citizens.find(555));
         System.out.println(citizens.find(5));
     }
 
@@ -70,5 +84,6 @@ class CitizensImpTest {
 
     @Test
     void size() {
+        System.out.println(citizens.size());
     }
 }

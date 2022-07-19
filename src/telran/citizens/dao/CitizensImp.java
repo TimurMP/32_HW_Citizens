@@ -70,7 +70,10 @@ public class CitizensImp implements Citizens {
         //TODO: add check for negative
         Person template = new Person(id, null, null, 0);
         int index = Collections.binarySearch(idList, template);
-        return idList.get(index);
+        if (index>0){
+            return idList.get(index);
+        }
+        return null;
     }
 
     @Override
@@ -100,7 +103,7 @@ public class CitizensImp implements Citizens {
 
     @Override
     public int size() {
-        return 0;
+        return idList.size();
     }
 
     @Override
