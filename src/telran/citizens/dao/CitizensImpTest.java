@@ -7,8 +7,6 @@ import telran.citizens.model.Person;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CitizensImpTest {
     Citizens citizens;
 
@@ -25,6 +23,14 @@ class CitizensImpTest {
 
     }
 
+
+    @Test
+    void CitizensImpListPerson() {
+        citizens.add(new Person(10, "Samus", "Aran", 16 ));
+        citizens.add(new Person(8, "Nathan", "Drake", 19));
+        citizens.printPeople();
+
+    }
     @Test
     void add() {
         citizens.add(new Person(10, "Samus", "Aran", 16 ));

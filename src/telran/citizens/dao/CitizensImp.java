@@ -24,13 +24,13 @@ public class CitizensImp implements Citizens {
 
 
     public CitizensImp(List<Person> citizens) {
+
         idList = new ArrayList<Person>();
         lastNameList = new ArrayList<Person>();
         ageList = new ArrayList<Person>();
 
         for (Person citizen : citizens) {
-            int index = Collections.binarySearch(idList, citizen);
-            if (index<0){
+            if (!idList.contains(citizen)){
                 idList.add(citizen);
                 lastNameList.add(citizen);
                 ageList.add(citizen);
@@ -40,12 +40,14 @@ public class CitizensImp implements Citizens {
         Collections.sort(lastNameList, lastNameComparator);
         Collections.sort(ageList, ageComparator);
         
-        //TODO: Add same ID check
     }
 
     @Override
     public boolean add(Person person) {
-        //TODO: Add checks
+        if (person == null || idList.contains(person)){
+            return false;
+        }
+
         int index = Collections.binarySearch(idList, person);
         idList.add(-index-1, person);
 
