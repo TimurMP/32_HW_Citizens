@@ -67,7 +67,6 @@ public class CitizensImp implements Citizens {
 
     @Override
     public Person find(int id) {
-        //TODO: add check for negative
         Person template = new Person(id, null, null, 0);
         int index = Collections.binarySearch(idList, template);
         if (index>0){
@@ -88,7 +87,7 @@ public class CitizensImp implements Citizens {
 
     @Override
     public Iterable<Person> getAllPersonSortedById() {
-        return null;
+        return idList;
     }
 
     @Override

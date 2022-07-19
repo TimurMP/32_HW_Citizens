@@ -72,10 +72,12 @@ class CitizensImpTest {
 
     @Test
     void getAllPersonSortedById() {
+        System.out.println(citizens.getAllPersonSortedById());
     }
 
     @Test
     void getAllPersonSortedByAge() {
+
     }
 
     @Test
