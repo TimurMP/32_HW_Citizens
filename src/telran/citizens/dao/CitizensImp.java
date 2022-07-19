@@ -52,10 +52,18 @@ public class CitizensImp implements Citizens {
         idList.add(-index-1, person);
 
         index = Collections.binarySearch(lastNameList, person, lastNameComparator);
-        lastNameList.add((-index)-1,person);
+        if (index>0){
+            lastNameList.add(index,person);
+        }else {
+            lastNameList.add((-index)-1,person);
+        }
 
         index = Collections.binarySearch(ageList, person, ageComparator);
-        ageList.add(-index-1,person);
+        if (index>0){
+            ageList.add(index,person);
+        }else {
+            ageList.add(-index-1,person);
+        }
         return true;
     }
 

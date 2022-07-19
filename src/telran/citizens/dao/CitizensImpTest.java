@@ -19,7 +19,7 @@ class CitizensImpTest {
         citizens = new CitizensImp(Arrays.asList(
                 new Person(1, "Donkey", "Kong", 23),
                 new Person(2, "Vault", "Boy", 20),
-                new Person(4, "Dixie", "Kong", 20),
+                new Person(4, "Dixie", "Kong", 19),
                 new Person(3, "Pac", "Man", 25),
                 new Person(5, "Leon", "Kennedy", 45),
                 new Person(5, "AAA", "BBB", 4555)
@@ -78,7 +78,7 @@ class CitizensImpTest {
                 new Person(1, "Donkey", "Kong", 23),
                 new Person(2, "Vault", "Boy", 20),
                 new Person(3, "Pac", "Man", 25),
-                new Person(4, "Dixie", "Kong", 20),
+                new Person(4, "Dixie", "Kong", 19),
                 new Person(5, "Leon", "Kennedy", 45));
 
         assertEquals(people,citizens.getAllPersonSortedById() );
