@@ -13,5 +13,7 @@ public interface Citizens {
     Iterable<Person> getAllPersonSortedByAge();
     Iterable<Person> getAllPersonSortedByLastName();
     int size();
+
+    void printPeople();
 }
 

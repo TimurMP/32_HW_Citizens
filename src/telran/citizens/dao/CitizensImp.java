@@ -3,6 +3,8 @@ package telran.citizens.dao;
 import telran.citizens.interfaces.Citizens;
 import telran.citizens.model.Person;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -10,30 +12,63 @@ public class CitizensImp implements Citizens {
     List<Person> idList;
     List<Person> lastNameList;
     List<Person> ageList;
-    static Comparator<Person> lastNameComparator;
-    static Comparator<Person> ageComparator;
+    static Comparator<Person> lastNameComparator = (p1, p2) -> p1.getLastName().compareTo(p2.getLastName());
+    static Comparator<Person> ageComparator = (p1, p2) -> Integer.compare(p1.getAge(), p2.getAge());
 
     public CitizensImp() {
-        //TODO:
+        idList = new ArrayList<Person>();
+        lastNameList = new ArrayList<Person>();
+        ageList = new ArrayList<Person>();
     }
 
+
+
     public CitizensImp(List<Person> citizens) {
-        //TODO:
+        idList = new ArrayList<Person>();
+        lastNameList = new ArrayList<Person>();
+        ageList = new ArrayList<Person>();
+
+        for (Person citizen : citizens) {
+            int index = Collections.binarySearch(idList, citizen);
+            if (index<0){
+                idList.add(citizen);
+                lastNameList.add(citizen);
+                ageList.add(citizen);
+            }
+        }
+        Collections.sort(idList, (p1, p2) -> p1.compareTo(p2));
+        Collections.sort(lastNameList, lastNameComparator);
+        Collections.sort(ageList, ageComparator);
+        
+        //TODO: Add same ID check
     }
 
     @Override
     public boolean add(Person person) {
-        return false;
+        //TODO: Add checks
+        int index = Collections.binarySearch(idList, person);
+        idList.add(-index-1, person);
+
+        index = Collections.binarySearch(lastNameList, person, lastNameComparator);
+        lastNameList.add((-index)-1,person);
+
+        index = Collections.binarySearch(ageList, person, ageComparator);
+        ageList.add(-index-1,person);
+        return true;
     }
 
     @Override
     public boolean remove(int id) {
+
         return false;
     }
 
     @Override
     public Person find(int id) {
-        return null;
+        //TODO: add check for negative
+        Person template = new Person(id, null, null, 0);
+        int index = Collections.binarySearch(idList, template);
+        return idList.get(index);
     }
 
     @Override
@@ -64,5 +99,28 @@ public class CitizensImp implements Citizens {
     @Override
     public int size() {
         return 0;
+    }
+
+    @Override
+    public void printPeople() {
+        System.out.println("idLIST: ");
+        for (Person person : idList) {
+            System.out.println(person);
+            
+        }
+
+
+        System.out.println("lastNameList: ");
+        for (Person person : lastNameList) {
+            System.out.println(person);
+
+        }
+
+        System.out.println("ageList: ");
+        for (Person person : ageList) {
+            System.out.println(person);
+
+        }
+        
     }
 }

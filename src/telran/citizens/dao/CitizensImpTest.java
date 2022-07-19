@@ -15,16 +15,22 @@ class CitizensImpTest {
     @BeforeEach
     void setUp() {
         citizens = new CitizensImp(Arrays.asList(
-                new Person(1, "AAA", "AA", 23),
-                new Person(2, "BBB", "BB", 20),
-                new Person(3, "CCC", "AA", 20),
-                new Person(4, "DDD", "DD", 25)
-
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(2, "Vault", "Boy", 20),
+                new Person(4, "Dixie", "Kong", 20),
+                new Person(3, "Pac", "Man", 25),
+                new Person(5, "Leon", "Kennedy", 45),
+                new Person(5, "AAA", "BBB", 4555)
         ));
+
     }
 
     @Test
     void add() {
+        citizens.add(new Person(10, "Samus", "Aran", 16 ));
+        citizens.add(new Person(8, "Nathan", "Drake", 19));
+        citizens.printPeople();
+
     }
 
     @Test
@@ -33,6 +39,7 @@ class CitizensImpTest {
 
     @Test
     void find() {
+        System.out.println(citizens.find(5));
     }
 
     @Test
