@@ -6,6 +6,8 @@ import telran.citizens.interfaces.Citizens;
 import telran.citizens.model.Person;
 
 import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -72,6 +74,14 @@ class CitizensImpTest {
 
     @Test
     void getAllPersonSortedById() {
+        List<Object> people = Arrays.asList(
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(2, "Vault", "Boy", 20),
+                new Person(3, "Pac", "Man", 25),
+                new Person(4, "Dixie", "Kong", 20),
+                new Person(5, "Leon", "Kennedy", 45));
+
+        assertEquals(people,citizens.getAllPersonSortedById() );
         System.out.println(citizens.getAllPersonSortedById());
     }
 
