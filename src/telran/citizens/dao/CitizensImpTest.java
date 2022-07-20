@@ -81,7 +81,14 @@ class CitizensImpTest {
     }
 
     @Test
-    void testFind1() {
+    void testFindAge() {
+        List<Object> people = Arrays.asList(
+                new Person(4, "Dixie", "Kong", 19),
+                new Person(2, "Vault", "Boy", 20),
+                new Person(1, "Donkey", "Kong", 23));
+
+        assertEquals(people,citizens.find(19,23) );
+
     }
 
     @Test

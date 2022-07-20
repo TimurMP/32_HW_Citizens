@@ -88,15 +88,24 @@ public class CitizensImp implements Citizens {
         if (index > 0) {
             return idList.get(index);
         }
-
-
         return null;
     }
 
     @Override
     public Iterable<Person> find(int minAge, int maxAge) {
-        //TODO
-        return null;
+        Person template1 = new Person(0, null, null, minAge);
+        Person template2 = new Person(0, null, null, maxAge);
+        int indexMin = Collections.binarySearch(ageList, template1, ageComparator);
+        int indexMax = Collections.binarySearch(ageList, template2, ageComparator);
+        if (indexMin < 0 || indexMax < 0 || indexMax < indexMin) {
+            ArrayList<Person> res = new ArrayList<Person>();
+            return res;
+        }
+        ArrayList<Person> res = new ArrayList<>(ageList.subList(indexMin, indexMax + 1));
+        for (Person re : res) {
+            System.out.println(re);
+        }
+        return res;
     }
 
     @Override
@@ -118,9 +127,6 @@ public class CitizensImp implements Citizens {
 
         }
         return res;
-
-
-        //TODO
 
     }
 
