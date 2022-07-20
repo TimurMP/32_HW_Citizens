@@ -69,7 +69,7 @@ public class CitizensImp implements Citizens {
 
     @Override
     public boolean remove(int id) {
-
+        //TODO:
         return false;
     }
 
@@ -85,11 +85,13 @@ public class CitizensImp implements Citizens {
 
     @Override
     public Iterable<Person> find(int minAge, int maxAge) {
+        //TODO
         return null;
     }
 
     @Override
     public Iterable<Person> find(String lastName) {
+        //TODO
         return null;
     }
 
