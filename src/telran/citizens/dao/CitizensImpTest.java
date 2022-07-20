@@ -42,13 +42,13 @@ class CitizensImpTest {
         assertEquals(3, citizensConstr.size());
 
 
-
     }
+
     @Test
     void add() {
-        assertTrue(citizens.add(new Person(10, "Samus", "Aran", 16 )));
+        assertTrue(citizens.add(new Person(10, "Samus", "Aran", 16)));
         assertTrue(citizens.add(new Person(8, "Nathan", "Drake", 19)));
-        assertFalse(citizens.add(new Person(10, "Samus", "Aran", 16 )));
+        assertFalse(citizens.add(new Person(10, "Samus", "Aran", 16)));
         citizens.printPeople();
     }
 
@@ -87,7 +87,7 @@ class CitizensImpTest {
                 new Person(2, "Vault", "Boy", 20),
                 new Person(1, "Donkey", "Kong", 23));
 
-        assertEquals(people,citizens.find(19,23) );
+        assertEquals(people, citizens.find(19, 23));
 
     }
 
@@ -100,7 +100,7 @@ class CitizensImpTest {
                 new Person(4, "Dixie", "Kong", 19),
                 new Person(5, "Leon", "Kennedy", 45));
 
-        assertEquals(people,citizens.getAllPersonSortedById() );
+        assertEquals(people, citizens.getAllPersonSortedById());
         System.out.println(citizens.getAllPersonSortedById());
     }
 
@@ -114,35 +114,34 @@ class CitizensImpTest {
                 new Person(3, "Pac", "Man", 25),
                 new Person(5, "Leon", "Kennedy", 45));
 
-        assertEquals(people,citizens.getAllPersonSortedByAge() );
+        assertEquals(people, citizens.getAllPersonSortedByAge());
         System.out.println(citizens.getAllPersonSortedByAge());
-
 
 
     }
 
     @Test
     void getAllPersonSortedByLastName() {
-        citizens.add(new Person(10, "Samus", "Aran", 16 ));
+        citizens.add(new Person(10, "Samus", "Aran", 16));
         citizens.add(new Person(8, "Nathan", "Drake", 19));
         List<Object> people = Arrays.asList(
-                new Person(10, "Samus", "Aran", 16 ),
+                new Person(10, "Samus", "Aran", 16),
                 new Person(2, "Vault", "Boy", 20),
                 new Person(8, "Nathan", "Drake", 19),
                 new Person(5, "Leon", "Kennedy", 45),
                 new Person(1, "Donkey", "Kong", 23),
                 new Person(4, "Dixie", "Kong", 19),
                 new Person(3, "Pac", "Man", 25)
-                );
+        );
 
-        assertEquals(people,citizens.getAllPersonSortedByLastName() );
+        assertEquals(people, citizens.getAllPersonSortedByLastName());
         System.out.println(citizens.getAllPersonSortedByLastName());
     }
 
     @Test
     void size() {
         assertEquals(5, citizens.size());
-        citizens.add(new Person(10, "Samus", "Aran", 16 ));
+        citizens.add(new Person(10, "Samus", "Aran", 16));
         citizens.add(new Person(8, "Nathan", "Drake", 19));
         assertEquals(7, citizens.size());
         citizens.remove(8);

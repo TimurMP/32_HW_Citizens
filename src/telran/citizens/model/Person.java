@@ -2,7 +2,7 @@ package telran.citizens.model;
 
 import java.util.Objects;
 
-public class Person implements Comparable<Person>{
+public class Person implements Comparable<Person> {
     int id;
     String firstName;
     String lastName;
