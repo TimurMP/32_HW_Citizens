@@ -141,12 +141,12 @@ class CitizensImpTest {
 
     @Test
     void size() {
-        System.out.println(citizens.size());
         assertEquals(5, citizens.size());
         citizens.add(new Person(10, "Samus", "Aran", 16 ));
         citizens.add(new Person(8, "Nathan", "Drake", 19));
         assertEquals(7, citizens.size());
-        //TODO: add size check after removal
+        citizens.remove(8);
+        assertEquals(6, citizens.size());
 
     }
 }

@@ -111,12 +111,24 @@ public class CitizensImp implements Citizens {
     @Override
     public Iterable<Person> find(String lastName) {
         List<Person> res = new ArrayList<>();
-
 //        Person template = new Person(0, null, lastName, 0);
 //        int index = Collections.binarySearch(lastNameList, template, lastNameComparator);
+//        int index2 = index-1;
+//        while (lastNameList.get(index).getLastName().equals(lastName) || lastNameList.get(index2).getLastName().equals(lastName)){
+//
+//            if (lastNameList.get(index2).getLastName().equals(lastName)){
+//                res.add(lastNameList.get(index2));
+//                index2--;
+//            }else {
+//                res.add(lastNameList.get(index));
+//                index++;
+//            }
+//
+//        }
 
 //
 //        res.add(lastNameList.get(index));
+
         for (Person person : lastNameList) {
             if (person.getLastName().equals(lastName)) {
                 res.add(person);
