@@ -54,6 +54,12 @@ class CitizensImpTest {
 
     @Test
     void remove() {
+        citizens.remove(2);
+        assertEquals(4, citizens.size());
+        citizens.remove(25);
+        assertEquals(4, citizens.size());
+
+        citizens.printPeople();
     }
 
     @Test
@@ -65,7 +71,13 @@ class CitizensImpTest {
     }
 
     @Test
-    void testFind() {
+    void testFindLastName() {
+        List<Object> people = Arrays.asList(
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(4, "Dixie", "Kong", 19)
+
+        );
+        assertEquals(people, citizens.find("Kong"));
     }
 
     @Test

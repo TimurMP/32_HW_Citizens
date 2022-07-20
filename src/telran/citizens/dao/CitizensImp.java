@@ -19,8 +19,10 @@ public class CitizensImp implements Citizens {
         idList = new ArrayList<Person>();
         lastNameList = new ArrayList<Person>();
         ageList = new ArrayList<Person>();
+        Collections.sort(idList, Person::compareTo);
+        Collections.sort(lastNameList, lastNameComparator);
+        Collections.sort(ageList, ageComparator);
     }
-
 
 
     public CitizensImp(List<Person> citizens) {
@@ -30,7 +32,7 @@ public class CitizensImp implements Citizens {
         ageList = new ArrayList<Person>();
 
         for (Person citizen : citizens) {
-            if (!idList.contains(citizen)){
+            if (!idList.contains(citizen)) {
                 idList.add(citizen);
                 lastNameList.add(citizen);
                 ageList.add(citizen);
@@ -39,47 +41,55 @@ public class CitizensImp implements Citizens {
         Collections.sort(idList, (p1, p2) -> p1.compareTo(p2));
         Collections.sort(lastNameList, lastNameComparator);
         Collections.sort(ageList, ageComparator);
-        
+
     }
 
     @Override
     public boolean add(Person person) {
-        if (person == null || idList.contains(person)){
+        if (person == null || idList.contains(person)) {
             return false;
         }
 
         int index = Collections.binarySearch(idList, person);
-        idList.add(-index-1, person);
+        idList.add(-index - 1, person);
 
         index = Collections.binarySearch(lastNameList, person, lastNameComparator);
-        if (index>0){
-            lastNameList.add(index,person);
-        }else {
-            lastNameList.add((-index)-1,person);
+        if (index > 0) {
+            lastNameList.add(index, person);
+        } else {
+            lastNameList.add((-index) - 1, person);
         }
 
         index = Collections.binarySearch(ageList, person, ageComparator);
-        if (index>0){
-            ageList.add(index,person);
-        }else {
-            ageList.add(-index-1,person);
+        if (index > 0) {
+            ageList.add(index, person);
+        } else {
+            ageList.add(-index - 1, person);
         }
         return true;
     }
 
     @Override
     public boolean remove(int id) {
-        //TODO:
-        return false;
+        Person toRemove = find(id);
+        if (toRemove == null) {
+            return false;
+        }
+        idList.remove(toRemove);
+        lastNameList.remove(toRemove);
+        ageList.remove(toRemove);
+        return true;
     }
 
     @Override
     public Person find(int id) {
         Person template = new Person(id, null, null, 0);
         int index = Collections.binarySearch(idList, template);
-        if (index>0){
+        if (index > 0) {
             return idList.get(index);
         }
+
+
         return null;
     }
 
@@ -91,8 +101,27 @@ public class CitizensImp implements Citizens {
 
     @Override
     public Iterable<Person> find(String lastName) {
+        List<Person> res = new ArrayList<>();
+
+//        Person template = new Person(0, null, lastName, 0);
+//        int index = Collections.binarySearch(lastNameList, template, lastNameComparator);
+
+//
+//        res.add(lastNameList.get(index));
+        for (Person person : lastNameList) {
+            if (person.getLastName().equals(lastName)) {
+                res.add(person);
+            }
+        }
+        for (Person re : res) {
+            System.out.println(re);
+
+        }
+        return res;
+
+
         //TODO
-        return null;
+
     }
 
     @Override
@@ -112,7 +141,10 @@ public class CitizensImp implements Citizens {
 
     @Override
     public int size() {
-        return idList.size();
+        if (idList.size() == lastNameList.size() && idList.size() == ageList.size()) {
+            return idList.size();
+        }
+        return -1;
     }
 
     @Override
@@ -120,7 +152,7 @@ public class CitizensImp implements Citizens {
         System.out.println("idLIST: ");
         for (Person person : idList) {
             System.out.println(person);
-            
+
         }
 
 
@@ -135,6 +167,6 @@ public class CitizensImp implements Citizens {
             System.out.println(person);
 
         }
-        
+
     }
 }
