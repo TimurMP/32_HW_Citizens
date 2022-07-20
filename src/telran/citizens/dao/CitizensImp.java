@@ -100,12 +100,12 @@ public class CitizensImp implements Citizens {
 
     @Override
     public Iterable<Person> getAllPersonSortedByAge() {
-        return null;
+        return ageList;
     }
 
     @Override
     public Iterable<Person> getAllPersonSortedByLastName() {
-        return null;
+        return lastNameList;
     }
 
     @Override

@@ -88,10 +88,36 @@ class CitizensImpTest {
     @Test
     void getAllPersonSortedByAge() {
 
+        List<Object> people = Arrays.asList(
+                new Person(4, "Dixie", "Kong", 19),
+                new Person(2, "Vault", "Boy", 20),
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(3, "Pac", "Man", 25),
+                new Person(5, "Leon", "Kennedy", 45));
+
+        assertEquals(people,citizens.getAllPersonSortedByAge() );
+        System.out.println(citizens.getAllPersonSortedByAge());
+
+
+
     }
 
     @Test
     void getAllPersonSortedByLastName() {
+        citizens.add(new Person(10, "Samus", "Aran", 16 ));
+        citizens.add(new Person(8, "Nathan", "Drake", 19));
+        List<Object> people = Arrays.asList(
+                new Person(10, "Samus", "Aran", 16 ),
+                new Person(2, "Vault", "Boy", 20),
+                new Person(8, "Nathan", "Drake", 19),
+                new Person(5, "Leon", "Kennedy", 45),
+                new Person(1, "Donkey", "Kong", 23),
+                new Person(4, "Dixie", "Kong", 19),
+                new Person(3, "Pac", "Man", 25)
+                );
+
+        assertEquals(people,citizens.getAllPersonSortedByLastName() );
+        System.out.println(citizens.getAllPersonSortedByLastName());
     }
 
     @Test
