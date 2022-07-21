@@ -1,18 +1,19 @@
 package telran.citizens.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Person implements Comparable<Person> {
     int id;
     String firstName;
     String lastName;
-    int age;
+    LocalDate birthDate;
 
-    public Person(int id, String firstName, String lastName, int age) {
+    public Person(int id, String firstName, String lastName, LocalDate birthDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -21,7 +22,7 @@ public class Person implements Comparable<Person> {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
+                ", age=" + getAge() +
                 '}';
     }
 
@@ -37,8 +38,8 @@ public class Person implements Comparable<Person> {
         this.lastName = lastName;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public int getId() {
@@ -53,8 +54,12 @@ public class Person implements Comparable<Person> {
         return lastName;
     }
 
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
     public int getAge() {
-        return age;
+        int today = LocalDate.now().getYear();
+        return today - birthDate.getYear();
     }
 
     @Override
