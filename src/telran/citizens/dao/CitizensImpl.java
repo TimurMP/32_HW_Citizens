@@ -90,10 +90,8 @@ public class CitizensImpl implements Citizens {
         LocalDate dateMax = LocalDate.of(today - maxAge, 12, 12);
         Person pattern = new Person(Integer.MIN_VALUE, null, null, dateMin);
         int from = -Collections.binarySearch(ageList, pattern, yearComparator) - 1;
-        System.out.println(from);
         pattern = new Person(Integer.MAX_VALUE, null, null, dateMax);
         int to = -Collections.binarySearch(ageList, pattern, yearComparator) - 1;
-        System.out.println(to);
         return ageList.subList(from, to);
     }
 
@@ -138,10 +136,10 @@ public class CitizensImpl implements Citizens {
         return today - birthDay.getYear();
     }
 
+
     private LocalDate ageToDatCalculator(int age) {
         int today = LocalDate.now().getYear();
-        LocalDate date = LocalDate.of(today - age, 1, 1);
-        return date;
+        return LocalDate.of(today - age, 1, 1);
     }
 
 

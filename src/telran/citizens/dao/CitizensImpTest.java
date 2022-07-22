@@ -67,6 +67,7 @@ class CitizensImpTest {
         citizens.printPeople();
     }
 
+
     @Test
     void testFindInt() {
         Person person = citizens.find(1);
