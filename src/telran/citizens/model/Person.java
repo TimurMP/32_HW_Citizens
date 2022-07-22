@@ -57,6 +57,7 @@ public class Person implements Comparable<Person> {
     public LocalDate getBirthDate() {
         return birthDate;
     }
+
     public int getAge() {
         int today = LocalDate.now().getYear();
         return today - birthDate.getYear();

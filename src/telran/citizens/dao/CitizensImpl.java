@@ -17,18 +17,15 @@ public class CitizensImpl implements Citizens {
     private static Comparator<Person> ageComparator;
 
     static {
-//        lastNameComparator = (p1, p2) -> {
-//            int res = p1.getLastName().compareTo(p2.getLastName());
-//            return res != 0 ? res : Integer.compare(p1.getId(), p2.getId());
-//        };
-//        ageComparator = (p1, p2) -> {
-//            int res = Integer.compare(p2.getBirthDate().getYear(), p1.getBirthDate().getYear());
-//            return res != 0 ? res : Integer.compare(p2.getId(), p1.getId());
-//        };
+        lastNameComparator = (p1, p2) -> {
+            int res = p1.getLastName().compareTo(p2.getLastName());
+            return res != 0 ? res : Integer.compare(p1.getId(), p2.getId());
+        };
+
 
         ageComparator = (p1, p2) -> {
             int res = p2.getBirthDate().compareTo(p1.getBirthDate());
-            return res != 0 ? res : Integer.compare(p2.getId(), p1.getId());
+            return res != 0 ? res : Integer.compare(p1.getId(), p2.getId());
         };
 
 
@@ -84,16 +81,19 @@ public class CitizensImpl implements Citizens {
     // O(log(n))
     @Override
     public Iterable<Person> find(int minAge, int maxAge) {
+        Comparator<Person> yearComparator = (p1, p2) -> {
+            int res = Integer.compare(p2.getBirthDate().getYear(), p1.getBirthDate().getYear());
+            return res != 0 ? res : Integer.compare(p1.getId(), p2.getId());
+        };
         int today = LocalDate.now().getYear();
-        LocalDate dateMin = LocalDate.of(today-minAge, 1, 1);
-        LocalDate dateMax = LocalDate.of(today-maxAge, 12, 12);
-
-
-
+        LocalDate dateMin = LocalDate.of(today - minAge, 1, 1);
+        LocalDate dateMax = LocalDate.of(today - maxAge, 12, 12);
         Person pattern = new Person(Integer.MIN_VALUE, null, null, dateMin);
-        int from = -Collections.binarySearch(ageList, pattern, ageComparator) - 1;
-        pattern = new Person(Integer.MAX_VALUE, null, null, ageToDatCalculator(maxAge));
-        int to = -Collections.binarySearch(ageList, pattern, ageComparator) - 1;
+        int from = -Collections.binarySearch(ageList, pattern, yearComparator) - 1;
+        System.out.println(from);
+        pattern = new Person(Integer.MAX_VALUE, null, null, dateMax);
+        int to = -Collections.binarySearch(ageList, pattern, yearComparator) - 1;
+        System.out.println(to);
         return ageList.subList(from, to);
     }
 
@@ -131,20 +131,18 @@ public class CitizensImpl implements Citizens {
         return idList.size();
 
 
-}
+    }
 
-    private int ageCalculator(LocalDate birthDay){
+    private int ageCalculator(LocalDate birthDay) {
         int today = LocalDate.now().getYear();
         return today - birthDay.getYear();
     }
 
-    private LocalDate ageToDatCalculator(int age){
+    private LocalDate ageToDatCalculator(int age) {
         int today = LocalDate.now().getYear();
-        LocalDate date = LocalDate.of(today-age, 1, 1);
+        LocalDate date = LocalDate.of(today - age, 1, 1);
         return date;
     }
-
-
 
 
     @Override
