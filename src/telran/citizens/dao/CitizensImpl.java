@@ -24,7 +24,7 @@ public class CitizensImpl implements Citizens {
 
 
         ageComparator = (p1, p2) -> {
-            int res = p2.getBirthDate().compareTo(p1.getBirthDate());
+            int res = Integer.compare(p1.getAge(), p2.getAge());
             return res != 0 ? res : Integer.compare(p1.getId(), p2.getId());
         };
 
@@ -81,17 +81,11 @@ public class CitizensImpl implements Citizens {
     // O(log(n))
     @Override
     public Iterable<Person> find(int minAge, int maxAge) {
-        Comparator<Person> yearComparator = (p1, p2) -> {
-            int res = Integer.compare(p2.getBirthDate().getYear(), p1.getBirthDate().getYear());
-            return res != 0 ? res : Integer.compare(p1.getId(), p2.getId());
-        };
-        int today = LocalDate.now().getYear();
-        LocalDate dateMin = LocalDate.of(today - minAge, 1, 1);
-        LocalDate dateMax = LocalDate.of(today - maxAge, 12, 12);
-        Person pattern = new Person(Integer.MIN_VALUE, null, null, dateMin);
-        int from = -Collections.binarySearch(ageList, pattern, yearComparator) - 1;
-        pattern = new Person(Integer.MAX_VALUE, null, null, dateMax);
-        int to = -Collections.binarySearch(ageList, pattern, yearComparator) - 1;
+        LocalDate now = LocalDate.now();
+        Person pattern = new Person(Integer.MIN_VALUE, null, null,  now.minusYears(minAge));
+        int from = -Collections.binarySearch(ageList, pattern, ageComparator) - 1;
+        pattern = new Person(Integer.MAX_VALUE, null, null, now.minusYears(maxAge));
+        int to = -Collections.binarySearch(ageList, pattern, ageComparator) - 1;
         return ageList.subList(from, to);
     }
 
