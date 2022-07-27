@@ -74,10 +74,10 @@ class CitizensImpTest {
         Person person = citizens.find(1);
         System.out.println(person);
         assertEquals(1, person.getId());
-//        assertEquals("Donkey", person.getFirstName());
-//        assertEquals("Kong", person.getLastName());
-//        assertEquals(35, person.getAge());
-//        assertNull(citizens.find(55));
+        assertEquals("Donkey", person.getFirstName());
+        assertEquals("Kong", person.getLastName());
+        assertEquals(35, person.getAge());
+        assertNull(citizens.find(55));
     }
 
     @Test

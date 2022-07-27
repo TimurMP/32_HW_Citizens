@@ -3,6 +3,7 @@ package telran.citizens.dao;
 import telran.citizens.interfaces.Citizens;
 import telran.citizens.model.Person;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class CitizensImpl implements Citizens {
@@ -58,6 +59,7 @@ public class CitizensImpl implements Citizens {
     // O(log(n))
     @Override
     public Person find(int id) {
+//        long t1 = System.currentTimeMillis();
         Person pattern = new Person(id, null, null, null);
         boolean index = idList.contains(pattern);
         if (!index){
@@ -65,9 +67,10 @@ public class CitizensImpl implements Citizens {
         }
         for (Person person : idList) {
             if (person.equals(pattern)){
+//                long t2 = System.currentTimeMillis();
+//                System.out.println(t2-t1);
                 return person;
             }
-
         }
         return null;
     }
@@ -75,13 +78,20 @@ public class CitizensImpl implements Citizens {
     // O(log(n))
     @Override
     public Iterable<Person> find(int minAge, int maxAge) {
-//        LocalDate now = LocalDate.now();
-//        Person pattern = new Person(Integer.MIN_VALUE, null, null,  now.minusYears(minAge));
-//        int from = -Collections.binarySearch(ageList, pattern, ageComparator) - 1;
-//        pattern = new Person(Integer.MAX_VALUE, null, null, now.minusYears(maxAge));
-//        int to = -Collections.binarySearch(ageList, pattern, ageComparator) - 1;
+        LocalDate now = LocalDate.now();
+        TreeSet<Person> ageTree = new TreeSet<>(ageComparator);
+        ageTree.addAll(idList);
+
+//        for (Person person : ageTree) {
+//            System.out.println(person);
+//
+//        }
+
+        Person patternMin = new Person(Integer.MIN_VALUE, null, null,  now.minusYears(minAge));
+        Person patternMax = new Person(Integer.MAX_VALUE, null, null, now.minusYears(maxAge));
+        return ageTree.subSet(patternMin,patternMax);
+
 //        return ageList.subList(from, to);
-        return null;
     }
 
     // O(log(n))
