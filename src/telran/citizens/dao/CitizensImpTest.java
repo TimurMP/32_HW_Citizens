@@ -117,6 +117,8 @@ class CitizensImpTest {
 
     @Test
     void testGetAllPersonSortedById() {
+        citizens.add(new Person(10, "Samus", "Aran", LocalDate.parse("1999-01-01")));
+        citizens.add(new Person(8, "Nathan", "Drake", LocalDate.parse("1970-01-01")));
         Iterable<Person> res = citizens.getAllPersonSortedById();
         int id = 0;
         for (Person person : res) {
@@ -142,6 +144,8 @@ class CitizensImpTest {
 
     @Test
     void testGetAllPersonSortedByLastName() {
+        citizens.add(new Person(10, "Samus", "Aran", LocalDate.parse("1999-01-01")));
+        citizens.add(new Person(8, "Nathan", "Drake", LocalDate.parse("1970-01-01")));
         Iterable<Person> res = citizens.getAllPersonSortedByLastName();
         String lastName = "";
         for (Person person : res) {

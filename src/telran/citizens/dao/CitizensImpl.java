@@ -98,19 +98,23 @@ public class CitizensImpl implements Citizens {
     // O(1)
     @Override
     public Iterable<Person> getAllPersonSortedById() {
-        return idList;
+        return new TreeSet<>(idList);
     }
 
     // O(1)
     @Override
     public Iterable<Person> getAllPersonSortedByLastName() {
-        return lastNameList;
+        return setConvertor(lastNameList, lastNameComparator);
     }
 
     // O(1)
     @Override
     public Iterable<Person> getAllPersonSortedByAge() {
-        return ageList;
+        long t1 = System.currentTimeMillis();
+        TreeSet<Person> ageTree = setConvertor(ageList, ageComparator);
+        long t2 = System.currentTimeMillis();
+        System.out.println(t2-t1);
+        return ageTree;
     }
 
     // O(1)
