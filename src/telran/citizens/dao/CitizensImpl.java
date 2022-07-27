@@ -79,7 +79,6 @@ public class CitizensImpl implements Citizens {
     @Override
     public Iterable<Person> find(int minAge, int maxAge) {
         LocalDate now = LocalDate.now();
-
         TreeSet<Person> ageTree = setConvertor(ageList, ageComparator);
         Person patternMin = new Person(Integer.MIN_VALUE, null, null,  now.minusYears(minAge));
         Person patternMax = new Person(Integer.MAX_VALUE, null, null, now.minusYears(maxAge));
@@ -91,11 +90,9 @@ public class CitizensImpl implements Citizens {
     @Override
     public Iterable<Person> find(String lastName) {
         Person patternMin = new Person(Integer.MIN_VALUE, null, lastName, null);
-//        int from = -Collections.binarySearch(lastNameList, pattern, lastNameComparator) - 1;
-//        pattern = new Person(Integer.MAX_VALUE, null, lastName, null);
-//        int to = -Collections.binarySearch(lastNameList, pattern, lastNameComparator) - 1;
-//        return lastNameList.subList(from, to);
-        return null;
+        TreeSet<Person> familyNameTree = setConvertor(lastNameList, lastNameComparator);
+        Person patternMax = new Person(Integer.MAX_VALUE, null, lastName, null);
+        return familyNameTree.subSet(patternMin, patternMax);
     }
 
     // O(1)

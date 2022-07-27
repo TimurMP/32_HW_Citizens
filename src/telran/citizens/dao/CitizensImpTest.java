@@ -89,6 +89,10 @@ class CitizensImpTest {
         res.forEach(p -> actual.add(p));
         Collections.sort(actual);
         assertIterableEquals(expected, actual);
+        for (Person re : res) {
+            System.out.println(re);
+
+        }
     }
 
 
