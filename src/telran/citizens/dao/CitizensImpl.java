@@ -62,11 +62,11 @@ public class CitizensImpl implements Citizens {
 //        long t1 = System.currentTimeMillis();
         Person pattern = new Person(id, null, null, null);
         boolean index = idList.contains(pattern);
-        if (!index){
+        if (!index) {
             return null;
         }
         for (Person person : idList) {
-            if (person.equals(pattern)){
+            if (person.equals(pattern)) {
 //                long t2 = System.currentTimeMillis();
 //                System.out.println(t2-t1);
                 return person;
@@ -80,9 +80,9 @@ public class CitizensImpl implements Citizens {
     public Iterable<Person> find(int minAge, int maxAge) {
         LocalDate now = LocalDate.now();
         TreeSet<Person> ageTree = setConvertor(ageList, ageComparator);
-        Person patternMin = new Person(Integer.MIN_VALUE, null, null,  now.minusYears(minAge));
+        Person patternMin = new Person(Integer.MIN_VALUE, null, null, now.minusYears(minAge));
         Person patternMax = new Person(Integer.MAX_VALUE, null, null, now.minusYears(maxAge));
-        return ageTree.subSet(patternMin,patternMax);
+        return ageTree.subSet(patternMin, true, patternMax, true);
     }
 
 
@@ -92,7 +92,7 @@ public class CitizensImpl implements Citizens {
         Person patternMin = new Person(Integer.MIN_VALUE, null, lastName, null);
         TreeSet<Person> familyNameTree = setConvertor(lastNameList, lastNameComparator);
         Person patternMax = new Person(Integer.MAX_VALUE, null, lastName, null);
-        return familyNameTree.subSet(patternMin, patternMax);
+        return familyNameTree.subSet(patternMin, true, patternMax, true);
     }
 
     // O(1)
@@ -110,11 +110,7 @@ public class CitizensImpl implements Citizens {
     // O(1)
     @Override
     public Iterable<Person> getAllPersonSortedByAge() {
-        long t1 = System.currentTimeMillis();
-        TreeSet<Person> ageTree = setConvertor(ageList, ageComparator);
-        long t2 = System.currentTimeMillis();
-        System.out.println(t2-t1);
-        return ageTree;
+        return setConvertor(ageList, ageComparator);
     }
 
     // O(1)
@@ -125,12 +121,11 @@ public class CitizensImpl implements Citizens {
 
     }
 
-    private TreeSet<Person> setConvertor (Set<Person> set, Comparator<Person> comparator){
+    private TreeSet<Person> setConvertor(Set<Person> set, Comparator<Person> comparator) {
         TreeSet<Person> personTreeSet = new TreeSet<>(comparator);
         personTreeSet.addAll(set);
         return personTreeSet;
     }
-
 
 
     @Override
